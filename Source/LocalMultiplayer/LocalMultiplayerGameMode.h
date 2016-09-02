@@ -15,6 +15,11 @@ class LOCALMULTIPLAYER_API ALocalMultiplayerGameMode : public AGameMode
 	
 public:
 
+	UPROPERTY(EditAnywhere)
+		int RegisteredPlayersNum;
+
 	ALocalMultiplayerGameMode();
+
+	virtual void BeginPlay() override;
 	
 };
