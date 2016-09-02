@@ -70,5 +70,7 @@ void ALMCharacter::Kill()
 {
 	if (SharedCameraPawn)
 		SharedCameraPawn->UnregisterPawn(this);
+	if (GEngine->GetGamePlayer(GetWorld(), 0)->PlayerController == Cast<APlayerController>(Controller))
+		Controller->Possess(SharedCameraPawn);
 	this->Destroy();
 }
