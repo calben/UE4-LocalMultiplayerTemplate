@@ -9,17 +9,18 @@ ALMCharacter::ALMCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to timprove performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 	const ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshObj(TEXT("/Game/Characters/YBot/Y_Bot"));
+	const ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBlueprintObj(TEXT("/Game/Characters/YBot/SGCharacterRifleAnimBlueprint"));
 	if(MeshObj.Object)
 		GetMesh()->SetSkeletalMesh(MeshObj.Object);
+	if (AnimBlueprintObj.Object)
+		GetMesh()->SetAnimInstanceClass(AnimBlueprintObj.Object::StaticClass());
 
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.1f;
 	GetCharacterMovement()->GravityScale = 1.4f;
-
 }
 
 // Called when the game starts or when spawned
