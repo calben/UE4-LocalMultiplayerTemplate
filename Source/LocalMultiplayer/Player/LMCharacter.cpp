@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "LocalMultiplayer.h"
+#include "SharedCameraPawn.h"
 #include "LMCharacter.h"
 
 
@@ -14,7 +15,7 @@ ALMCharacter::ALMCharacter()
 	if(MeshObj.Object)
 		GetMesh()->SetSkeletalMesh(MeshObj.Object);
 	if (AnimBlueprintObj.Object)
-		GetMesh()->SetAnimInstanceClass(AnimBlueprintObj.Object::StaticClass());
+		GetMesh()->SetAnimInstanceClass(AnimBlueprintObj.Object->GeneratedClass);
 
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
@@ -67,6 +68,7 @@ void ALMCharacter::MoveRight(float Value)
 
 void ALMCharacter::Kill()
 {
-	if(SharedCameraPawn)
-
+	if (SharedCameraPawn)
+		SharedCameraPawn->UnregisterPawn(this);
+	this->Destroy();
 }

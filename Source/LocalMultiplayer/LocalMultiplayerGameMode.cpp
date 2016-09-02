@@ -9,10 +9,9 @@
 ALocalMultiplayerGameMode::ALocalMultiplayerGameMode()
 {
 	DefaultPawnClass = ALMCharacter::StaticClass();
-	ASharedCameraPawn* SharedCameraPawn;
 }
 
-void AALittleDeathGameMode::BeginPlay()
+void ALocalMultiplayerGameMode::BeginPlay()
 {
 	for (auto i = 0; i < RegisteredPlayersNum; ++i)
 		UGameplayStatics::CreatePlayer(GetWorld(), i);
@@ -27,7 +26,7 @@ void AALittleDeathGameMode::BeginPlay()
 				UE_LOG(LogTemp, Warning, TEXT("DETECTED LOCAL CONTROLLER %s"), *Controller->GetName());
 				if (SharedCameraPawn)
 				{
-					SharedCamera->WatchedPlayers.Add(Controller->GetPawn());
+					SharedCameraPawn->RegisterPawn(Controller->GetPawn());
 					ALMCharacter* LMCharacter = Cast<ALMCharacter>(Controller->GetPawn());
 					if (LMCharacter)
 					{
@@ -37,6 +36,6 @@ void AALittleDeathGameMode::BeginPlay()
 			}
 		}
 	}
-	if (SharedCamera)
-		GetWorld()->GetFirstPlayerController()->SetViewTarget(SharedCamera);
+	if (SharedCameraPawn)
+		GetWorld()->GetFirstPlayerController()->SetViewTarget(SharedCameraPawn);
 }
