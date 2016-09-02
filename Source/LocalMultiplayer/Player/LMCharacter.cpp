@@ -67,5 +67,6 @@ void ALMCharacter::MoveRight(float Value)
 
 void ALMCharacter::Kill()
 {
+	if(SharedCameraPawn)
 
 }

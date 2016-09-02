@@ -33,3 +33,12 @@ void ASharedCameraPawn::SetupPlayerInputComponent(class UInputComponent* InputCo
 
 }
 
+void ASharedCameraPawn::RegisterPawn(APawn* Pawn)
+{
+	RegisteredPawns.Add(Pawn);
+}
+
+void ASharedCameraPawn::UnregisterPawn(APawn* Pawn)
+{
+	RegisteredPawns.Remove(Pawn);
+}

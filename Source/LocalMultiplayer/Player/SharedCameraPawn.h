@@ -23,6 +23,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	UPROPERTY(EditAnywhere)
+		TArray<APawn*> RegisteredPawns;
+
+	void RegisterPawn(APawn* Pawn);
 	
-	
+	void UnregisterPawn(APawn* Pawn);
+
 };
