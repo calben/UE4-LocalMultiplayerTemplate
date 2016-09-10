@@ -13,13 +13,16 @@ ASharedCameraPawn::ASharedCameraPawn()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->bDoCollisionTest = true;
 	SpringArm->bAbsoluteRotation = true;
-	SpringArm->RelativeRotation = FRotator(-90.f, 0.f, 0.f);
+	SpringArm->RelativeRotation = FRotator(-70.f, 0.f, 0.f);
 	SpringArm->TargetArmLength = 400.f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->bUsePawnControlRotation = false;
 
-	RootComponent = SpringArm;
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MESH"));
+
+	RootComponent = Mesh;
+	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm);
 }
 
@@ -35,7 +38,7 @@ void ASharedCameraPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FVector tmp;
+	FVector tmp = FVector::ZeroVector;
 	if (RegisteredPawns.Num() > 0)
 	{
 		for (APawn* Pawn : RegisteredPawns)
@@ -48,10 +51,11 @@ void ASharedCameraPawn::Tick(float DeltaTime)
 	{
 		tmp = FVector(0.f, 0.f, 1000.f);
 	}
+
 	tmp /= RegisteredPawns.Num();
 	tmp.Z = PreferredZPosition;
+	
 	SetActorLocation(tmp);
-
 }
 
 // Called to bind functionality to input

@@ -16,9 +16,9 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+
 	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
+	virtual void Tick(float DeltaSeconds) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
@@ -30,13 +30,16 @@ public:
 		class UCameraComponent* Camera;
 
 	UPROPERTY(EditAnywhere)
+		class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere)
 		TArray<APawn*> RegisteredPawns;
 
 	UPROPERTY(EditAnywhere)
 		float PreferredZPosition = 400.f;
 
 	void RegisterPawn(APawn* Pawn);
-	
+
 	void UnregisterPawn(APawn* Pawn);
 
 };
