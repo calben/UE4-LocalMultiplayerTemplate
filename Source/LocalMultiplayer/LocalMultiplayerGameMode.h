@@ -16,7 +16,7 @@ class LOCALMULTIPLAYER_API ALocalMultiplayerGameMode : public AGameMode
 public:
 
 	UPROPERTY(EditAnywhere)
-		int RegisteredPlayersNum = 3;
+		int RegisteredPlayersNum = 2;
 
 	ALocalMultiplayerGameMode();
 

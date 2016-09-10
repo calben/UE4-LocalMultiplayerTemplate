@@ -11,10 +11,10 @@ ASharedCameraPawn::ASharedCameraPawn()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	SpringArm->bDoCollisionTest = true;
+	SpringArm->bDoCollisionTest = false;
 	SpringArm->bAbsoluteRotation = true;
 	SpringArm->RelativeRotation = FRotator(-70.f, 0.f, 0.f);
-	SpringArm->TargetArmLength = 400.f;
+	SpringArm->TargetArmLength = 800.f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->bUsePawnControlRotation = false;

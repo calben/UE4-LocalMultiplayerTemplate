@@ -36,7 +36,7 @@ public:
 		TArray<APawn*> RegisteredPawns;
 
 	UPROPERTY(EditAnywhere)
-		float PreferredZPosition = 400.f;
+		float PreferredZPosition = 100.f;
 
 	void RegisterPawn(APawn* Pawn);
 

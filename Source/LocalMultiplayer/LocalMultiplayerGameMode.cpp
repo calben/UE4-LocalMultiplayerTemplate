@@ -23,7 +23,6 @@ void ALocalMultiplayerGameMode::BeginPlay()
 		{
 			if (Controller->IsLocalController())
 			{
-				UE_LOG(LogTemp, Warning, TEXT("DETECTED LOCAL CONTROLLER %s"), *Controller->GetName());
 				if (SharedCameraPawn)
 				{
 					SharedCameraPawn->RegisterPawn(Controller->GetPawn());
