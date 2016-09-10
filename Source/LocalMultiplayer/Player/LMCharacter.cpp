@@ -8,11 +8,11 @@
 // Sets default values
 ALMCharacter::ALMCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to timprove performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to timprove performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	const ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshObj(TEXT("/Game/Characters/YBot/Y_Bot"));
 	const ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBlueprintObj(TEXT("/Game/Characters/YBot/CharacterRifleAnimBlueprint"));
-	if(MeshObj.Object)
+	if (MeshObj.Object)
 		GetMesh()->SetSkeletalMesh(MeshObj.Object);
 	if (AnimBlueprintObj.Object)
 		GetMesh()->SetAnimInstanceClass(AnimBlueprintObj.Object->GeneratedClass);
@@ -28,6 +28,7 @@ ALMCharacter::ALMCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->bDoCollisionTest = true;
 	SpringArm->RelativeRotation = FRotator(-80.f, 0.f, 0.f);
+	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->TargetArmLength = 800.f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
@@ -42,13 +43,12 @@ ALMCharacter::ALMCharacter()
 void ALMCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
-void ALMCharacter::Tick( float DeltaTime )
+void ALMCharacter::Tick(float DeltaTime)
 {
-	Super::Tick( DeltaTime );
+	Super::Tick(DeltaTime);
 
 }
 
@@ -78,6 +78,12 @@ void ALMCharacter::MoveRight(float Value)
 		FVector Direction = FVector(0.f, 1.f, 0.f);
 		AddMovementInput(Direction, Value);
 	}
+}
+
+
+float ALMCharacter::GetCharacterMovementSpeed()
+{
+	return GetVelocity().Size();
 }
 
 void ALMCharacter::Kill()

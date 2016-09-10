@@ -38,5 +38,6 @@ public:
 
 	void MoveRight(float Value);
 	
+	float GetCharacterMovementSpeed();
 
 };
