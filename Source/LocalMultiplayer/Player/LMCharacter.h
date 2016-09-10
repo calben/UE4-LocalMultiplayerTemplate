@@ -26,6 +26,12 @@ public:
 	UPROPERTY(EditAnywhere)
 		class ASharedCameraPawn* SharedCameraPawn;
 
+	UPROPERTY(EditAnywhere)
+		class USpringArmComponent* SpringArm;
+
+	UPROPERTY(EditAnywhere)
+		class UCameraComponent* Camera;
+
 	virtual void Kill();
 
 	void MoveForward(float Value);

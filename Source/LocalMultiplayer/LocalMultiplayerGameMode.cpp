@@ -36,6 +36,6 @@ void ALocalMultiplayerGameMode::BeginPlay()
 			}
 		}
 	}
-	if (SharedCameraPawn)
-		GetWorld()->GetFirstPlayerController()->SetViewTarget(SharedCameraPawn);
+	// if (SharedCameraPawn)
+	//	GetWorld()->GetFirstPlayerController()->SetViewTarget(SharedCameraPawn);
 }

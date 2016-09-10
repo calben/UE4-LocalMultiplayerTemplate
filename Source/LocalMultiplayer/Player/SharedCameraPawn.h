@@ -24,7 +24,16 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	UPROPERTY(EditAnywhere)
+		class USpringArmComponent* SpringArm;
+
+	UPROPERTY(EditAnywhere)
+		class UCameraComponent* Camera;
+
+	UPROPERTY(EditAnywhere)
 		TArray<APawn*> RegisteredPawns;
+
+	UPROPERTY(EditAnywhere)
+		float PreferredZPosition = 400.f;
 
 	void RegisterPawn(APawn* Pawn);
 	

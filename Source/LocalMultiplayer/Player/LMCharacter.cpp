@@ -11,17 +11,31 @@ ALMCharacter::ALMCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to timprove performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	const ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshObj(TEXT("/Game/Characters/YBot/Y_Bot"));
-	const ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBlueprintObj(TEXT("/Game/Characters/YBot/SGCharacterRifleAnimBlueprint"));
+	const ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBlueprintObj(TEXT("/Game/Characters/YBot/CharacterRifleAnimBlueprint"));
 	if(MeshObj.Object)
 		GetMesh()->SetSkeletalMesh(MeshObj.Object);
 	if (AnimBlueprintObj.Object)
 		GetMesh()->SetAnimInstanceClass(AnimBlueprintObj.Object->GeneratedClass);
-
-	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f); // ...at this rotation rate
+	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -88.f));
+	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.1f;
 	GetCharacterMovement()->GravityScale = 1.4f;
+
+	bUseControllerRotationYaw = false;
+
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	SpringArm->bDoCollisionTest = true;
+	SpringArm->RelativeRotation = FRotator(-80.f, 0.f, 0.f);
+	SpringArm->TargetArmLength = 800.f;
+
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	Camera->bUsePawnControlRotation = false;
+
+
+	SpringArm->SetupAttachment(RootComponent);
+	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 }
 
 // Called when the game starts or when spawned
