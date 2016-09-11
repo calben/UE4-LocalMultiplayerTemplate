@@ -32,6 +32,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		class UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere)
+		float Health = 100.f;
+
 	virtual void Kill();
 
 	void MoveForward(float Value);
@@ -39,5 +42,7 @@ public:
 	void MoveRight(float Value);
 	
 	float GetCharacterMovementSpeed();
+
+	void Damage(float Value);
 
 };

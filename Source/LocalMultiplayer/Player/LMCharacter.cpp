@@ -94,3 +94,12 @@ void ALMCharacter::Kill()
 		Controller->Possess(SharedCameraPawn);
 	this->Destroy();
 }
+
+void ALMCharacter::Damage(float Value)
+{
+	this->Health -= Value;
+	if (Health < 0)
+	{
+		this->Kill();
+	}
+}
